@@ -13,6 +13,6 @@ ExpenseList:
     methods: ['GET']
 
 ExpenseAdd:
-    path: /expense
+    path: /expense/add
     controller: App\Controller\ExpenseController::add
-    methods: ['POST']
+    methods: ['GET']
