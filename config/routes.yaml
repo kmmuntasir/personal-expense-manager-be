@@ -1,0 +1,18 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+root:
+    path: /
+    controller: App\Controller\MainController::index
+    methods: ['GET']
+
+ExpenseList:
+    path: /expense
+    controller: App\Controller\ExpenseController::list
+    methods: ['GET']
+
+ExpenseAdd:
+    path: /expense
+    controller: App\Controller\ExpenseController::add
+    methods: ['POST']
