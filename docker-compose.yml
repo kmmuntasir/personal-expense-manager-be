@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+
+  db:
+    container_name: mariadb
+    image: mariadb:10.11.2
+    ports:
+      - "10132:3306"
+    volumes:
+      - pemData:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: foobar
+
+  app:
+    container_name: personal-expense-manager
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "8080:80"
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "9001:80"
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=foobar
+
+volumes:
+  pemData:
+    driver: local
