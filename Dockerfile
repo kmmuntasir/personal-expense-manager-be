@@ -6,11 +6,18 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # Setting our work directory on the docker machine
 WORKDIR /app
 
-# Updating the system
-RUN apt-get update -y
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        libicu-dev \
+        libzip-dev \
+        unzip \
+        git \
+        wget \
+        mariadb-client
 
-# Installing mariadb library
-RUN apt-get install -y libmariadb-dev git curl zip unzip
-
-# Installing mysqli php extension
-RUN docker-php-ext-install mysqli
+# Install PHP extensions
+RUN docker-php-ext-install \
+    intl \
+    pdo_mysql \
+    zip

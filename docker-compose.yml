@@ -8,6 +8,7 @@ services:
     ports:
       - "10132:3306"
     volumes:
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
       - pemData:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: foobar
